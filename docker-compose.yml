@@ -1,0 +1,17 @@
+services:
+  n8n:
+    image: n8nio/n8n
+    restart: always # unless-stopped
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+    env_file:
+      - .env
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=${N8N_BASIC_AUTH_ACTIVE}
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
+      - N8N_USER_MANAGEMENT_DISABLED=true
+      - N8N_HOST=n8n.local
+      - WEBHOOK_TUNNEL_URL=http://localhost:5678
